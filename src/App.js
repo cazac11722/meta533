@@ -13,11 +13,11 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/a/m" element={<AdvertiserManagement />}></Route>
-          <Route path="/l/m" element={<LandingManagement />}></Route>
-          <Route path="/m/m" element={<MediaManagement />}></Route>
-          <Route path="/ap/m" element={<ApplicationManagement />}></Route>
+          <Route path="/meta533" element={<Dashboard />}></Route>
+          <Route path="/meta533/a/m" element={<AdvertiserManagement />}></Route>
+          <Route path="/meta533/l/m" element={<LandingManagement />}></Route>
+          <Route path="/meta533/m/m" element={<MediaManagement />}></Route>
+          <Route path="/meta533/ap/m" element={<ApplicationManagement />}></Route>
           <Route element={<ProtectedRoute />}>
           </Route>
         </Routes>
