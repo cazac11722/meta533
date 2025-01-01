@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sideber";
 import Footer from "../../components/Footer";
 import NaverItem from "../../components/Body/Naver_item";
 import { Link } from "react-router-dom";
-import SearchItem from "../../components/search/Search_item";
+import SearchItem from "../../components/Search/Search_item";
 
 const MediaManagement = () => {
     return (

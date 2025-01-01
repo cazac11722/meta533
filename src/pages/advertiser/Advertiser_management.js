@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sideber";
 import Footer from "../../components/Footer";
 import NaverItem from "../../components/Body/Naver_item";
-import SearchItem from "../../components/search/Search_item";
+import SearchItem from "../../components/Search/Search_item";
 
 const AdvertiserManagement = () => {
     return (
