@@ -1,6 +1,6 @@
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sideber";
-import Footer from "../../components/Footer";
+import Header from "../../components/PageLayout/Header";
+import Sidebar from "../../components/PageLayout/Sideber";
+import Footer from "../../components/PageLayout/Footer";
 import LineChart from "../../components/Chart/LineChart";
 import BadialBarChart from "../../components/Chart/RadialBarChart";
 

@@ -1,11 +1,23 @@
-import Header from "../../components/Header";
-import Sidebar from "../../components/Sideber";
-import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
-import SearchItem from "../../components/Search/Search_item";
+import Header from "../../components/PageLayout/Header";
+import Sidebar from "../../components/PageLayout/Sideber";
+import Footer from "../../components/PageLayout/Footer";
 import LineChart from "../../components/Chart/LineChart";
+import AddressOrganization from "../../components/Body/Address_organization";
+import SearchFilter from "../../components/Body/SearchFilter";
+import DataList from "../../components/Body/DataList";
 
 const ApplicationManagement = () => {
+    var lor = [
+        { title: "Home", href: '/' },
+        { title: "매체코드 관리", href: '/m/m' }
+    ];
+
+    var list1 = [
+        { title: "총 상담신청", value: '1,500', percent: 20 },
+        { title: "총 체험희망", value: '1,500', percent: 20 },
+        { title: "총 대기중", value: '1,500', percent: 20 },
+        { title: "총 체험거부", value: '1,500', percent: 20 },
+    ]
     return (
         <div className="bg-gray-50 dark:bg-gray-800">
             <Header />
@@ -13,34 +25,8 @@ const ApplicationManagement = () => {
                 <Sidebar />
                 <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
                     <div className="px-4 pt-6">
-                        <div className="grid grid-cols-1 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-                            <div className="mb-4 col-span-full xl:mb-2">
-                                <nav className="flex mb-5">
-                                    <ul className="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
-                                        <li className="inline-flex items-center">
-                                            <Link className="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-500">
-                                                <span className="material-icons w-5 h-5 mr-2.5">
-                                                    home
-                                                </span>
-                                                Home
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <div className="flex items-center">
-                                                <span className="material-icons w-6 h-6 text-gray-400">
-                                                    keyboard_arrow_right
-                                                </span>
-                                                <span className="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">무료 체험 신청 및 관리</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">무료 체험 신청 및 관리</h1>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 pt-4 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
-                            <SearchItem />
-                        </div>
+                        <AddressOrganization data={lor} />
+                        <SearchFilter />
                         <div className="grid gap-4 mt-4 xl:grid-cols-1 2xl:grid-cols-3">
                             <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-3 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                                 <div className="flex items-center justify-between mb-4">
@@ -60,81 +46,14 @@ const ApplicationManagement = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-4 ">
-
-                            <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                                <div className="w-full">
-                                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 상담신청</h3>
-                                    <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">1,500</span>
-                                    <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                                        <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                                            </svg>
-                                            12.5%
-                                        </span>
-                                        한달 전
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                                <div className="w-full">
-                                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 체험희망</h3>
-                                    <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">1,500</span>
-                                    <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                                        <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                                            </svg>
-                                            12.5%
-                                        </span>
-                                        한달 전
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                                <div className="w-full">
-                                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 대기중</h3>
-                                    <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">1,500</span>
-                                    <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                                        <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                                            </svg>
-                                            12.5%
-                                        </span>
-                                        한달 전
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                                <div className="w-full">
-                                    <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 체험거부</h3>
-                                    <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">1,500</span>
-                                    <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                                        <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                                            </svg>
-                                            12.5%
-                                        </span>
-                                        한달 전
-                                    </p>
-                                </div>
-                            </div>
-
-
-                        </div>
+                        <DataList data={list1} cols={4} />
                         <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6  dark:bg-gray-800">
                             <div className="items-center justify-between lg:flex">
                                 <div className="mb-4 lg:mb-0">
                                     <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">무료 체험 신청 내역</h3>
                                     <span className="text-base font-normal text-gray-500 dark:text-gray-400">무료 체험 신청 테이블 입니다.</span>
                                 </div>
-                               
+
                             </div>
                             <div className="flex flex-col mt-6">
                                 <div className="overflow-x-auto rounded-lg">
