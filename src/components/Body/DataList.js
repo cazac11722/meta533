@@ -2,7 +2,7 @@ const DataList = ({ data, cols }) => {
 
     let colClasses = `xl:grid-cols-${cols}`;
     return (
-        <div className={`grid w-full grid-cols-1 gap-4 mt-4 xl:grid ${colClasses}`}>
+        <div className={`grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-4`}>
             {
                 data.map((e, index) => (
                     <div key={index} className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
