@@ -41,9 +41,9 @@ const DataTable = ({ data }) => {
                                                 {
 
                                                     e.map((v, no) => (
-                                                        <td key={`tbody-row-${no}`} className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <td key={`tbody-row-${index}-col-${no}`} className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                                             {
-                                                                no == 10 ?
+                                                                no === 10 ?
                                                                     <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">
                                                                         진행중
                                                                     </span> : v

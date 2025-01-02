@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Chart from 'react-apexcharts';
 
 const BadialBarChart = () => {
-    const [state, setState] = React.useState({
+    const [state] = React.useState({
 
         series: [44, 55, 67],
         options: {
