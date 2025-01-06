@@ -47,6 +47,7 @@ const ApplicationManagement = () => {
                             </div>
                         </div>
                         <DataList data={list1} cols={4} />
+                        
                         <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6  dark:bg-gray-800">
                             <div className="items-center justify-between lg:flex">
                                 <div className="mb-4 lg:mb-0">

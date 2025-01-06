@@ -14,7 +14,7 @@ const SearchFilter = () => {
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <span className="material-icons w-5 text-gray-500 dark:text-gray-400">
-                                    calendar_month
+                                    today
                                 </span>
                             </div>
                             <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input" placeholder="시작 날짜" />
@@ -22,7 +22,7 @@ const SearchFilter = () => {
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <span className="material-icons w-5 text-gray-500 dark:text-gray-400">
-                                    calendar_month
+                                    today
                                 </span>
                             </div>
                             <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input" placeholder="종료 날짜" />
@@ -32,19 +32,19 @@ const SearchFilter = () => {
                         <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             오늘
                         </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             어제
                         </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             1주
                         </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             15일
                         </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             1개월
                         </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             3개월
                         </a>
                     </div>
@@ -62,7 +62,7 @@ const SearchFilter = () => {
                             <div className="relative  w-full">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <span className="material-icons w-5 text-gray-500 dark:text-gray-400">
-                                        calendar_month
+                                        today
                                     </span>
                                 </div>
                                 <select className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input"  >
@@ -83,7 +83,7 @@ const SearchFilter = () => {
                             <div className="relative  w-full">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <span className="material-icons w-5 text-gray-500 dark:text-gray-400">
-                                        calendar_month
+                                        today
                                     </span>
                                 </div>
                                 <select className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input"  >
@@ -104,7 +104,7 @@ const SearchFilter = () => {
                             <div className="relative  w-full">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <span className="material-icons w-5 text-gray-500 dark:text-gray-400">
-                                        calendar_month
+                                        today
                                     </span>
                                 </div>
                                 <select className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input"  >

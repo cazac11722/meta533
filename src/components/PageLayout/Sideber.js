@@ -16,10 +16,10 @@ const Sidebar = () => {
                                 <SidebarItem href="/meta533/a/m" name="광고주 관리" icon="language" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/m/m" name="매체코드 관리" icon="qr_code" />
+                                <SidebarItem href="/meta533/m/m" name="매체코드 관리" icon="code" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/l/m" name="랜딩 관리" icon="space_dashboard" />
+                                <SidebarItem href="/meta533/l/m" name="랜딩 관리" icon="dashboard" />
                             </li>
                             <li>
                                 <SidebarItem href="/meta533/ap/m" name="무료 체험 신청 및 관리" icon="touch_app" />

@@ -66,7 +66,7 @@ const AdvertiserManagement = () => {
                     <div className="px-4 pt-6">
                         <AddressOrganization data={lor} />
                         <SearchFilter  />
-                        <DataList data={list} cols={3} />
+                        <DataList data={list} cols={5} />
                         <DataTable data={dataTable} />
                     </div>
                     <Footer />
