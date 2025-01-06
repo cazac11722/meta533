@@ -7,8 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 const Header = () => {
     const { isDarkMode, toggleTheme } = useTheme();
     const { isOpen, toggleDropdown } = useDropdown();
-    const { logout, fetch } = useAuth();
-
+    const { logout, user } = useAuth();
     return (
         <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div className="px-3 py-3 lg:px-5 lg:pl-3 relative">
@@ -46,7 +45,7 @@ const Header = () => {
                             <div>
                                 <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleDropdown}>
                                     <span className="sr-only">Open user menu</span>
-                                    <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"></img>
+                                    <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user" />
                                 </button>
                             </div>
                             <div className={`z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600 block absolute top-14 right-0 ${isOpen ? 'block' : 'hidden'}`} >
@@ -55,7 +54,7 @@ const Header = () => {
                                         {fetch().data.username}
                                     </p> */}
                                     <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                        {fetch().data.username}
+                                        {user.data.username}
                                     </p>
                                 </div>
                                 <ul className="py-1" >

@@ -4,14 +4,13 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      colors: { 
+      colors: {
         primary: {
           700: '#2563eb',
         },
       },
     },
   },
-  plugins: [],
   safelist: [
     'xl:grid-cols-1',
     'xl:grid-cols-2',

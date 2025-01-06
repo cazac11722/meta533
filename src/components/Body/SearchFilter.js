@@ -29,24 +29,24 @@ const SearchFilter = () => {
                         </div>
                     </div>
                     <div className="ml-4">
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             오늘
-                        </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        </button>
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             어제
-                        </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        </button>
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             1주
-                        </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        </button>
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             15일
-                        </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        </button>
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             1개월
-                        </a>
-                        <a href="#" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
+                        </button>
+                        <button type="button" className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-gray-700 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800">
                             3개월
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 xl:grid-cols-3 xl:gap-4">

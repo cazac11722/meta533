@@ -15,11 +15,6 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const fetch = () => {
-    let user = localStorage.getItem('user');
-    return JSON.parse(user);
-  };
-
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

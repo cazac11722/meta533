@@ -16,7 +16,7 @@ const LoginPage = () => {
         { username: "", password: "" },
         async (data) => {
             try {
-                const response = await fetch("https://lias303.pythonanywhere.com/api/accounts/login/", {
+                const response = await fetch("http://127.0.0.1:8000/api/accounts/login/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
@@ -24,7 +24,7 @@ const LoginPage = () => {
 
                 if (response.ok) {
                     const result = await response.json();
-                    login(result.access, { data, "id" : data.username });
+                    login(result.access, { data, "id" : result.user_id });
                     alert("로그인이 되었습니다.");
                     navigate("/meta533/");
                     // 로그인 성공 처리
@@ -37,7 +37,6 @@ const LoginPage = () => {
             }
         }
     );
-
     return (
         <Layout isDarkMode={isDarkMode} onThemeToggle={toggleTheme}>
             <SignLogo />
