@@ -26,7 +26,7 @@ const LoginPage = () => {
                     const result = await response.json();
                     login(result.access, { data, "id" : result.user_id });
                     alert("로그인이 되었습니다.");
-                    navigate("/meta533/");
+                    navigate("/");
                     // 로그인 성공 처리
                 } else {
                     console.error("Login failed:", response.status);

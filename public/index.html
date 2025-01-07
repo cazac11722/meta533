@@ -32,9 +32,10 @@
     <div id="root"></div>
     <script type="text/javascript">
       (function (l) {
-        if (l.search) {
+       
+        if (l.pathname) {
           var q = {};
-          l.search.slice(1).split('&').forEach(function (v) {
+          l.pathname.slice(1).split('&').forEach(function (v) {
             var a = v.split('=');
             q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
           });

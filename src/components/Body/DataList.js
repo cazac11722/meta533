@@ -1,5 +1,4 @@
 const DataList = ({ data, cols }) => {
-
     let colClasses = `xl:grid-cols-${cols}`;
     return (
         <div className={`grid w-full grid-cols-1 gap-4 mt-4 ${colClasses}`}>
@@ -8,21 +7,13 @@ const DataList = ({ data, cols }) => {
                     <div key={index} className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                         <div className="w-full">
                             <h3 className="text-base font-normal text-gray-500 dark:text-gray-400 mb-2">{e.title}</h3>
-                            {typeof e.value == 'object' ? 
-                            <>
-                            <div className="flex items-center mb-2">
-                                <div className="w-40 mr-10 text-sm font-medium dark:text-white sm:text-3xl">방문수</div>
-                                <div className="w-16 text-sm font-medium dark:text-white sm:text-2xl">1,500</div>
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <div className="w-40 mr-10 text-sm font-medium dark:text-white sm:text-3xl">방문당 비용</div>
-                                <div className="w-16 text-sm font-medium dark:text-white sm:text-2xl">1,000</div>
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <div className="w-40 mr-10 text-sm font-medium dark:text-white sm:text-3xl">이탈율</div>
-                                <div className="w-16 text-sm font-medium dark:text-white sm:text-2xl">3%</div>
-                            </div>
-                            </>
+                            {typeof e.value == 'object' ?
+                                e.value.map((j, i) => (
+                                    <div key={i} className="flex items-center mb-2">
+                                        <div className="w-40 mr-10 text-sm font-medium dark:text-white sm:text-3xl">{j.title}</div>
+                                        <div className=" text-sm font-medium dark:text-white sm:text-2xl">{j.value}</div>
+                                    </div>
+                                ))
                                 : <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{e.value.toLocaleString('ko-KR')}</span>
                             }
 

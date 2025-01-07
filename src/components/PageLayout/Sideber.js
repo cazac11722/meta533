@@ -10,19 +10,19 @@ const Sidebar = () => {
                     <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         <ul className="pb-2 space-y-2">
                             <li>
-                                <SidebarItem href="/meta533/" name="Dashboard" icon="public" />
+                                <SidebarItem href="/" name="Dashboard" icon="public" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/a/m" name="광고주 관리" icon="language" />
+                                <SidebarItem href="/a/m" name="광고주 관리" icon="language" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/m/m" name="매체코드 관리" icon="code" />
+                                <SidebarItem href="/m/m" name="매체코드 관리" icon="code" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/l/m" name="랜딩 관리" icon="dashboard" />
+                                <SidebarItem href="/l/m" name="랜딩 관리" icon="dashboard" />
                             </li>
                             <li>
-                                <SidebarItem href="/meta533/ap/m" name="무료 체험 신청 및 관리" icon="touch_app" />
+                                <SidebarItem href="/ap/m" name="무료 체험 신청 및 관리" icon="touch_app" />
                             </li>
                         </ul>
                     </div>

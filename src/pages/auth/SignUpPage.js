@@ -22,7 +22,7 @@ const SignUpPage = () => {
 
                 if (response.ok) {
                     alert("회원가입이 되었습니다.");
-                    navigate("/meta533/login");
+                    navigate("/login");
                     // 로그인 성공 처리
                 } else {
                     console.error("Login failed:", response.status);
