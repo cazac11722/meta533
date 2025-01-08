@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export const useForm = (initialState, onSubmit) => {
-    const mainUrl = 'http://127.0.0.1:8000/';
+    const mainUrl = 'https://533.world/';
     const [formState, setFormState] = useState(initialState);
     const [errors, setErrors] = useState({});
 
