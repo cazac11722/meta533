@@ -115,6 +115,11 @@ const LandingManagement = () => {
                 vis['visit_count'] += visits.visit_count;
                 vis['visit_cost'] += parseInt(visits.visit_cost);
                 vis['bounce_count'] += visits.bounce_count;
+
+                app['application_count'] += applications.application_count;
+                app['application_cost'] += parseInt(applications.application_cost);
+
+                
             }
             // 데이터를 업데이트
             setDataTable(prevState => ({
@@ -129,6 +134,14 @@ const LandingManagement = () => {
                         { title: '방문수', value: vis['visit_count'] + "명" },
                         { title: '방문당 비용', value: vis['visit_cost'] + "원" },
                         { title: '이탈율', value: parseInt(((vis['bounce_count'] / vis['visit_count']) * 100) || 0) + "%" }
+                    ],
+                };
+                updatedList[1] = {
+                    ...updatedList[1], // 기존 데이터 복사
+                    value: [
+                        { title: '총 신청', value: app['application_count'] + "명" },
+                        { title: '신청당 비용', value: app['application_cost'] + "원" },
+                        { title: '신청율', value: parseInt(((vis['visit_count'] / app['application_count']) * 100) || 0) + "%" }
                     ],
                 };
                 updatedList[2] = {
