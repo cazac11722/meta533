@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export const useForm = (initialState, onSubmit) => {
-    const mainUrl = 'https://533.world/';
+    const mainUrl = 'https://lias303.pythonanywhere.com/';
     const [formState, setFormState] = useState(initialState);
     const [errors, setErrors] = useState({});
 
