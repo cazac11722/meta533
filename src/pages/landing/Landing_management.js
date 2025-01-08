@@ -86,8 +86,8 @@ const LandingManagement = () => {
                 "bounce_count": 0,
             };
             let app = {
-                'application_count' : 0,
-                'application_cost' : 0,
+                'application_count': 0,
+                'application_cost': 0,
             }
 
             for (const e of result) {
@@ -98,7 +98,19 @@ const LandingManagement = () => {
                     e.id,
                     `<a href="http://533.world/l/v/${e.url}" target='_blank'>${e.title}</a>`,
                     `${e.url} <br> <button type="button" data-url="http://533.world/l/v/${e.url}" class="copy-button inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >복사</button>`,
-                    e.ad_platform, `${visits.visit_count}명`, `${parseInt(visits.visit_cost)}원`, `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`, `${applications.application_count}명`, `${parseInt(applications.application_cost)}원`, "0%", `${visits.bounce_count}명`, `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`, e.start_date, e.end_date, '무료', '<button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-700 sm:w-auto bg-red-600 mr-1" >삭제</button><button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >수정</button>'
+                    e.ad_platform,
+                    `${visits.visit_count}명`,
+                    `${parseInt(visits.visit_cost)}원`,
+                    `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`,
+                    `${applications.application_count}명`, `${parseInt(applications.application_cost)}원`,
+                    "0%",
+                    `${visits.bounce_count}명`,
+                    `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`,
+                    e.start_date,
+                    e.end_date,
+                    '무료',
+                    `<button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-700 sm:w-auto bg-red-600 mr-1" >삭제</button>
+                    <button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >수정</button>`
                 ])
                 vis['visit_count'] += visits.visit_count;
                 vis['visit_cost'] += parseInt(visits.visit_cost);
@@ -116,14 +128,14 @@ const LandingManagement = () => {
                     value: [
                         { title: '방문수', value: vis['visit_count'] + "명" },
                         { title: '방문당 비용', value: vis['visit_cost'] + "원" },
-                        { title: '이탈율', value: (((vis['bounce_count'] / vis['visit_count']) * 100) || 0).toFixed(2) + "%" }
+                        { title: '이탈율', value: parseInt(((vis['bounce_count'] / vis['visit_count']) * 100) || 0) + "%" }
                     ],
                 };
                 updatedList[2] = {
                     ...updatedList[2], // 기존 데이터 복사
                     value: [
-                        { title: '이탈수', value: vis['bounce_count'] + "명"  },
-                        { title: '이탈율', value: (((vis['bounce_count'] / vis['visit_count']) * 100) || 0).toFixed(2) + "%"  },
+                        { title: '이탈수', value: vis['bounce_count'] + "명" },
+                        { title: '이탈율', value: parseInt(((vis['bounce_count'] / vis['visit_count']) * 100) || 0) + "%" },
                         { title: '재 방문', value: '0%' }
                     ],
                 };

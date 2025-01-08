@@ -14,7 +14,7 @@ const Sidebar = () => {
                             <li>
                                 <SidebarItem href="/" name="Dashboard" icon="public" />
                             </li>
-                            {user.id == 1 ? (<li>
+                            {user.lv == 4 ? (<li>
                                 <SidebarItem href="/a/m" name="광고주 관리" icon="language" />
                             </li>) : null}
                             <li>

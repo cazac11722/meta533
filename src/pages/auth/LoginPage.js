@@ -24,7 +24,7 @@ const LoginPage = () => {
 
                 if (response.ok) {
                     const result = await response.json();
-                    login(result.access, { data, "id" : result.user_id });
+                    login(result.access, { data, "id" : result.user_id, lv : result.membership_level });
                     alert("로그인이 되었습니다.");
                     navigate("/");
                     // 로그인 성공 처리

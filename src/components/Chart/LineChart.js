@@ -1,59 +1,87 @@
-import React from 'react';
-import Chart from 'react-apexcharts';
+import React, { useEffect, useState } from 'react';
+import { useTheme } from '../../contexts/hooks/useTheme';
+import ReactApexChart from 'react-apexcharts';
+import { useAuth } from '../../contexts/AuthContext';
+import { useForm } from '../../contexts/hooks/useForm';
 
 const LineChart = () => {
-    const [state] = React.useState({
+    const { isDarkMode } = useTheme();
+    const { user } = useAuth();
+    const { mainUrl } = useForm();
+    const [list, setList] = useState([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`${mainUrl}api/landing/application-details/user/${user.id}/`);
+            const result = await response.json();
+
+            // 데이터 처리 최적화
+            const vis = result.reduce(
+                (acc, e) => {
+                    if (e.applications_data) {
+                        e.applications_data.forEach((j) => {
+                            if (j.applications_data) {
+                                j.applications_data.forEach((detail) => {
+                                    acc["Pending"] += detail.consultation_result === "Pending" ? 1 : 0;
+                                    acc["Declined"] += detail.consultation_result === "Declined" ? 1 : 0;
+                                    acc["Interested"] += detail.consultation_result === "Interested" ? 1 : 0;
+                                });
+                            }
+                        });
+                    }
+                    return acc;
+                },
+                { Pending: 0, Declined: 0, Interested: 0 }
+            );
+
+            // 상태 업데이트
+            setList([0, 0, 1]);
+            
+        } catch (error) {
+            console.error("API 요청 중 오류 발생:", error);
+        }
+    };
+
+    const [state, setState] = React.useState({
 
         series: [{
-            name: '신청수',
-            type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-        }, {
-            name: '비율',
-            type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            name: "",
+            data: list || []
         }],
         options: {
             chart: {
                 height: 350,
                 type: 'line',
-                foreColor: '#FFFFFF'
-            },
-            stroke: {
-                width: [0, 4]
+                zoom: {
+                    enabled: false
+                }
             },
             dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1]
+                enabled: false
             },
-            labels: ["2024년 12월 01일",
-                "2024년 12월 02일",
-                "2024년 12월 03일",
-                "2024년 12월 04일",
-                "2024년 12월 05일",
-                "2024년 12월 06일",
-                "2024년 12월 07일",
-                "2024년 12월 08일",
-                "2024년 12월 09일",
-                "2024년 12월 10일",
-                "2024년 12월 11일",
-                "2024년 12월 12일"],
-            yaxis: [{
-                title: {
-                    text: '신청수',
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
                 },
-            }, {
-                opposite: true,
-                title: {
-                    text: '비율'
-                }
-            }]
+            },
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            }
         },
+
     });
+
+    useEffect(() => {
+        // fetchData();
+    }, [user.id]); // `user.id`가 변경될 때만 호출
 
     return (
         <div>
-            <Chart options={state.options} series={state.series} type="line" height="350" />
+            <ReactApexChart options={state.options} series={state.series} type="line" height="350" />
         </div>
     );
 

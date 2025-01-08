@@ -21,11 +21,11 @@ const AdvertiserManagement = () => {
     ];
 
     const [list, setlist] = useState([
-        { title: "매체", value: 2340, percent: 10 },
-        { title: "광고주", value: 2340, percent: 10 },
-        { title: "광고대행사", value: 2340, percent: 10 },
-        { title: "진행중", value: 2340, percent: 10 },
-        { title: "대기중", value: 2340, percent: 10 },
+        { title: "매체", value: 2340, percent: 0 },
+        { title: "광고주", value: 2340, percent: 0 },
+        { title: "광고대행사", value: 2340, percent: 0 },
+        { title: "진행중", value: 2340, percent: 0 },
+        { title: "대기중", value: 2340, percent: 0 },
     ])
 
     const [dataTable, setDataTable] = useState({

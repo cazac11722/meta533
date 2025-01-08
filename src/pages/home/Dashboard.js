@@ -3,8 +3,122 @@ import Sidebar from "../../components/PageLayout/Sideber";
 import Footer from "../../components/PageLayout/Footer";
 import LineChart from "../../components/Chart/LineChart";
 import BadialBarChart from "../../components/Chart/RadialBarChart";
+import { useEffect, useState } from "react";
+import DataList from "../../components/Body/DataList";
+import DataTable from "../../components/Body/DataTable";
+import { useForm } from "../../contexts/hooks/useForm";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const { mainUrl } = useForm();
+  const [list, setlist] = useState([
+    { title: "총 방문수", value: 0, percent: 0 },
+    { title: "총 신청수", value: 0, percent: 0 },
+    { title: "총 이탈수", value: 0, percent: 0 },
+  ]);
+
+  const [dataTable, setDataTable] = useState({
+    title: '랜딩 데이터',
+    contents: '랜딩 데이터 테이블 입니다.',
+    type: 'landing',
+    thead: [
+      {
+        data: [
+          { title: "번호", rowspan: 1 },
+          { title: "이름", rowspan: 1 },
+          { title: "연락처", rowspan: 1 },
+          { title: "상담요청시간", rowspan: 1 },
+          { title: "신청일자", rowspan: 1 },
+          { title: "상담결과", rowspan: 1 },
+          { title: "메모", rowspan: 1 },
+        ]
+      },
+    ],
+    data: [],
+  });
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${mainUrl}api/landing/landing-pages/user/${user.id}/`);
+      let result = await response.json();
+      let data = [];
+      let vis = {
+        "vis1": 0,
+        "vis2": 0,
+        "vis3": 0,
+      };
+
+      for (const e of result) {
+        let visits = e.visits_data[0];
+        let applications = e.applications_data[0];
+        vis['vis1'] += visits.visit_count;
+        vis['vis2'] += parseInt(applications.application_count);
+        vis['vis3'] += visits.bounce_count;
+      }
+
+      setlist(prevState => {
+        const updatedList = [...prevState]; // 기존 배열 복사
+        updatedList[0] = {
+          ...updatedList[0], // 기존 데이터 복사
+          value: vis['vis1'] + '명',
+        };
+        updatedList[1] = {
+          ...updatedList[1], // 기존 데이터 복사
+          value: vis['vis2'] + '명',
+        };
+        updatedList[2] = {
+          ...updatedList[2], // 기존 데이터 복사
+          value: vis['vis3'] + '명',
+        };
+        return updatedList; // 업데이트된 배열 반환
+      });
+
+
+      const response2 = await fetch(`${mainUrl}api/landing/application-details/user/${user.id}/`);
+      let result2 = await response2.json();
+
+      const dataList = result2.reduce(
+        (acc, e) => {
+          if (e.applications_data) {
+            e.applications_data.forEach((j) => {
+              if (j.applications_data) {
+                j.applications_data.forEach((detail) => {
+                  acc.push([
+                    '-',
+                    detail.name,
+                    detail.contact,
+                    '-',
+                    detail.application_date,
+                    `
+                    <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <option value="1" ${detail.consultation_result == 'Pending' ? 'checked' : ''}>대기중</option>
+                      <option value="1" ${detail.consultation_result == 'Declined' ? 'checked' : ''}>체험거부</option>
+                      <option value="1" ${detail.consultation_result == 'Interested' ? 'checked' : ''}>체험희망</option>
+                    </select>
+                    `,
+                    `<textarea id="message" rows="4" class="block p-2.5 w-300px text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="여기에 여러분의 생각을 적어 보세요...">${detail.memo}</textarea>`
+                  ]);
+                });
+              }
+            });
+          }
+          return acc;
+        },
+        []
+      );
+      setDataTable(prevState => ({
+        ...prevState,
+        data: dataList // API 데이터에 맞게 매핑 필요
+      }));
+    } catch (error) {
+      console.error("API 요청 중 오류 발생:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="bg-gray-50 dark:bg-gray-800">
@@ -21,7 +135,7 @@ const Dashboard = () => {
                     <h3 className="text-base font-light text-gray-500 dark:text-gray-400">무료 신청 요청시간을 차트로 확인해 보세요.</h3>
                   </div>
                   <div className="flex items-center justify-end flex-1 text-base font-medium text-green-500 dark:text-green-400">
-                    12.5%
+                    0%
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
                     </svg>
@@ -42,53 +156,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
-              <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <div className="w-full">
-                  <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 방문수</h3>
-                  <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">2,340</span>
-                  <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clipRule="evenodd" fillRule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                      </svg>
-                      12.5%
-                    </span>
-                    한달 전
-                  </p>
-                </div>
-              </div>
-              <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <div className="w-full">
-                  <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 신청수</h3>
-                  <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">2,340</span>
-                  <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clipRule="evenodd" fillRule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                      </svg>
-                      12.5%
-                    </span>
-                    한달 전
-                  </p>
-                </div>
-              </div>
-              <div className="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <div className="w-full">
-                  <h3 className="text-base font-normal text-gray-500 dark:text-gray-400">총 이탈수</h3>
-                  <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">2,340</span>
-                  <p className="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clipRule="evenodd" fillRule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                      </svg>
-                      12.5%
-                    </span>
-                    한달 전
-                  </p>
-                </div>
-              </div>
-            </div>
+            <DataList data={list} cols={3} />
             <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6  dark:bg-gray-800">
               <div className="items-center justify-between lg:flex">
                 <div className="mb-4 lg:mb-0">
@@ -96,65 +164,7 @@ const Dashboard = () => {
                   <span className="text-base font-normal text-gray-500 dark:text-gray-400">무료 체험 신청 테이블 입니다.</span>
                 </div>
               </div>
-              <div className="flex flex-col mt-6">
-                <div className="overflow-x-auto rounded-lg">
-                  <div className="inline-block min-w-full align-middle">
-                    <div className="overflow-hidden shadow sm:rounded-lg">
-                      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
-                          <tr>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                              번호
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                              이름
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white">
-                              연락처
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                              상담요청시간
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-center text-gray-500  uppercase dark:text-white " >
-                              신청일자
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white">
-                              상담결과
-                            </th>
-                            <th scope="col" className="p-4 text-xs font-medium tracking-wider text-center text-gray-500 uppercase dark:text-white">
-                              메모
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="bg-white dark:bg-gray-800">
-                          <tr>
-                            <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">1</td>
-                            <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-white">최민수</td>
-                            <td className="p-4 text-sm font-semibold text-center text-gray-900 whitespace-nowrap dark:text-white">000-0000-0000</td>
-                            <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-white">오전 9시~12시</td>
-                            <td className="p-4 text-sm font-normal text-center text-gray-500 whitespace-nowrap dark:text-white">2024-12-25 13:22:30</td>
-                            <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-white">
-                              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <option>대기중</option>
-                                <option>체험거부</option>
-                                <option>체험희망</option>
-                              </select>
-                            </td>
-                            <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-sky-400">
-                              <textarea className="h-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 datepicker-input"></textarea>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between pt-3 sm:pt-6">
-                <div>
-                  <button className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" type="button" data-dropdown-toggle="transactions-dropdown">Last 7 days <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                </div>
-              </div>
+              <DataTable data={dataTable} />
             </div>
           </div>
           <Footer />
