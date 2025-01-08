@@ -59,13 +59,13 @@ const Header = () => {
                                 </div>
                                 <ul className="py-1" >
                                     <li>
-                                        <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
+                                        <Link to={"/"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                                     </li>
                                     <li>
-                                        <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">매체코드 관리</Link>
+                                        <Link to={`/m/m/${user.id}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">매체코드 관리</Link>
                                     </li>
                                     <li>
-                                        <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">랜딩 관리</Link>
+                                        <Link to={`/l/m/${user.id}`}  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">랜딩 관리</Link>
                                     </li>
                                     <li>
                                         <div onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">로그아웃</div>

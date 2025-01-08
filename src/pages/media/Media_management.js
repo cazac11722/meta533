@@ -2,7 +2,6 @@ import Header from "../../components/PageLayout/Header";
 import Sidebar from "../../components/PageLayout/Sideber";
 import Footer from "../../components/PageLayout/Footer";
 import AddressOrganization from "../../components/Body/Address_organization";
-import SearchFilter from "../../components/Body/SearchFilter";
 import DataList from "../../components/Body/DataList";
 import DataTable from "../../components/Body/DataTable";
 
@@ -70,7 +69,6 @@ const MediaManagement = () => {
                 <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
                     <div className="px-4 pt-6">
                         <AddressOrganization data={lor} />
-                        <SearchFilter />
                         <DataList data={list1} cols={5} />
                         <DataList data={list2} cols={3} />
                         <DataTable data={dataTable} />

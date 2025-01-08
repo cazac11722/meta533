@@ -179,7 +179,6 @@ const LandingManagement = () => {
                 <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
                     <div className="px-4 pt-6">
                         <AddressOrganization data={lor} />
-                        <SearchFilter />
                         <DataList data={list} cols={4} />
                         <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6 dark:bg-gray-800">
                             <div className="items-center justify-between lg:flex">

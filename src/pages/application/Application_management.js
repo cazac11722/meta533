@@ -26,7 +26,6 @@ const ApplicationManagement = () => {
                 <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
                     <div className="px-4 pt-6">
                         <AddressOrganization data={lor} />
-                        <SearchFilter />
                         <div className="grid gap-4 mt-4 xl:grid-cols-1 2xl:grid-cols-3">
                             <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-3 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                                 <div className="flex items-center justify-between mb-4">

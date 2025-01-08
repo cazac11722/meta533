@@ -6,15 +6,15 @@ const DataTable = ({ data }) => {
                 <div className="overflow-x-auto rounded-lg">
                     <div className="inline-block min-w-full align-middle">
                         <div className="overflow-hidden shadow sm:rounded-lg">
-                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                                <thead className="bg-gray-50 dark:bg-gray-700" >
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400" >
                                     {
                                         data.thead.map((e, i) => (
                                             <tr key={`thead-row-${i}`}>
                                                 {
                                                     e.data.map((v, no) => (
-                                                        <th key={`thead-row-${i}-col-${no}`} scope="col" rowSpan={v.rowspan || 1} colSpan={v.colspan || 1} className={`p-4 text-xs font-medium tracking-wider text-${v.textAlign} text-gray-500 uppercase dark:text-white`}>
-                                                            {v.title}
+                                                        <th key={`thead-row-${i}-col-${no}`} scope="col" rowSpan={v.rowspan || 1} colSpan={v.colspan || 1} className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
+                                                            <div dangerouslySetInnerHTML={{ __html: v.title }} />
                                                         </th>
                                                     ))
                                                 }
@@ -25,10 +25,10 @@ const DataTable = ({ data }) => {
                                 <tbody className="bg-white dark:bg-gray-800">
                                     {
                                         data.data.map((e, index) => (
-                                            <tr key={`tbody-row-${index}`}>
+                                            <tr key={`tbody-row-${index}`} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                 {
                                                     e.map((v, no) => (
-                                                        <td key={`tbody-row-${index}-col-${no}`} className="p-4 text-sm text-center font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <td  key={`tbody-row-${index}-col-${no}`} className="p-4 text-sm text-center font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                                             <div dangerouslySetInnerHTML={{ __html: v }} />
                                                         </td>
                                                     ))
