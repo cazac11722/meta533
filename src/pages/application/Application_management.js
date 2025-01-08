@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "../../contexts/hooks/useForm";
 import { useAuth } from "../../contexts/AuthContext";
 import DataTable from "../../components/Body/DataTable";
+import { useParams } from "react-router-dom";
 
 const ApplicationManagement = () => {
     var lor = [
@@ -17,6 +18,7 @@ const ApplicationManagement = () => {
     ];
 
     const { user } = useAuth();
+    const { id } = useParams();
     const { mainUrl } = useForm();
     const [list, setlist] = useState([
         { title: "총 상담신청", value: 0, percent: 0 },
@@ -46,7 +48,7 @@ const ApplicationManagement = () => {
     });
     const fetchData = async () => {
         try {
-            const response = await fetch(`${mainUrl}api/landing/landing-pages/user/${user.id}/`);
+            const response = await fetch(`${mainUrl}api/landing/landing-pages/user/${id}/`);
             let result = await response.json();
             let data = [];
             let vis = {
@@ -56,7 +58,7 @@ const ApplicationManagement = () => {
                 "vis4": 0,
             };
 
-            const response2 = await fetch(`${mainUrl}api/landing/application-details/user/${user.id}/`);
+            const response2 = await fetch(`${mainUrl}api/landing/application-details/user/${id}/`);
             let result2 = await response2.json();
 
             const dataList = result2.reduce(
