@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import SidebarItem from "../Sidebar/Sideber_item";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Sidebar = () => {
+    const { user } = useAuth();
 
     return (
         <aside id="sidebar" className="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width">
@@ -12,17 +14,17 @@ const Sidebar = () => {
                             <li>
                                 <SidebarItem href="/" name="Dashboard" icon="public" />
                             </li>
-                            <li>
+                            {user.id == 1 ? (<li>
                                 <SidebarItem href="/a/m" name="광고주 관리" icon="language" />
+                            </li>) : null}
+                            <li>
+                                <SidebarItem href={`/m/m/${user.id}`} name="매체코드 관리" icon="code" />
                             </li>
                             <li>
-                                <SidebarItem href="/m/m" name="매체코드 관리" icon="code" />
+                                <SidebarItem href={`/l/m/${user.id}`} name="랜딩 관리" icon="dashboard" />
                             </li>
                             <li>
-                                <SidebarItem href="/l/m" name="랜딩 관리" icon="dashboard" />
-                            </li>
-                            <li>
-                                <SidebarItem href="/ap/m" name="무료 체험 신청 및 관리" icon="touch_app" />
+                                <SidebarItem href={`/ap/m/${user.id}`} name="무료 체험 신청 및 관리" icon="touch_app" />
                             </li>
                         </ul>
                     </div>

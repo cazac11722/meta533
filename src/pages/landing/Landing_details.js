@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { useForm } from "../../contexts/hooks/useForm";
 
 const LandingDetails = ({ url }) => {
     const [id, setId] = useState();
     const [html, setHtml] = useState();
+    const { mainUrl } = useForm();
     const [isOnline, setIsOnline] = useState(navigator.onLine); // 네트워크 상태 추적
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/landing/landing-pages/url/${url}`);
+            const response = await fetch(`${mainUrl}api/landing/landing-pages/url/${url}`);
             const result = await response.json();
             setHtml(result[0].html_content);
             setId(result[0].visits_data[0].id);
@@ -17,9 +19,10 @@ const LandingDetails = ({ url }) => {
     };
 
     const postExitData = async (offsetY) => {
+        console.log(offsetY)
         try {
             if (!id) return; // ID가 없으면 실행하지 않음
-            const response = await fetch("http://127.0.0.1:8000/api/landing/visit-details/", {
+            const response = await fetch(`${mainUrl}api/landing/visit-details/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,7 +32,7 @@ const LandingDetails = ({ url }) => {
                     ip_address: await getIPAddress(),
                     session_start: new Date().toISOString(), // 시작 시간은 현재 시간으로
                     session_end: new Date().toISOString(), // 종료 시간도 현재 시간으로
-                    exit_y_coordinate: offsetY, // 현재 스크롤 위치
+                    exit_y_coordinate: parseInt(offsetY), // 현재 스크롤 위치
                     visit: id,
                 }),
             });

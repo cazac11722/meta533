@@ -1,8 +1,11 @@
+import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useForm } from "../../contexts/hooks/useForm";
 
 const LandingPopup = ({ title, onClose, setData }) => {
     const { user } = useAuth();
+    const { mainUrl } = useForm();
+    const { id } = useParams();
 
     const { formState, handleChange, handleSubmit } = useForm(
         {
@@ -12,7 +15,7 @@ const LandingPopup = ({ title, onClose, setData }) => {
             "start_date": null,
             "ad_cost": null,
             "html_content": "",
-            "user": null
+            "user": id
         },
 
         async (data) => {
@@ -25,10 +28,9 @@ const LandingPopup = ({ title, onClose, setData }) => {
             const yyyymmdd = `${year}-${month}-${day}`;
 
             data.start_date = yyyymmdd;
-            data.user = user.id;
 
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/landing/landing-pages/", {
+                const response = await fetch(`${mainUrl}api/landing/landing-pages/`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

@@ -12,11 +12,11 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const { formState, handleChange, handleSubmit } = useForm(
+    const { formState, mainUrl, handleChange, handleSubmit } = useForm(
         { username: "", password: "" },
         async (data) => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/accounts/login/", {
+                const response = await fetch(`${mainUrl}/api/accounts/login/`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

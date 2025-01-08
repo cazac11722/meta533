@@ -11,16 +11,18 @@ import LoginPage from "./pages/auth/LoginPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import { useEffect, useState } from "react";
 import LandingDetails from "./pages/landing/Landing_details";
+import { useForm } from "./contexts/hooks/useForm";
 
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { mainUrl } = useForm();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/landing/landing-pages/user/1/");
+        const response = await fetch(`${mainUrl}api/landing/landing-pages/`);
         const result = await response.json();
         setData(result.map((e) => e.url));
         setLoading(false);
@@ -52,9 +54,9 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="" element={<Dashboard />} />
               <Route path="/a/m" element={<AdvertiserManagement />} />
-              <Route path="/l/m" element={<LandingManagement />} />
-              <Route path="/m/m" element={<MediaManagement />} />
-              <Route path="/ap/m" element={<ApplicationManagement />} />
+              <Route path="/l/m/:id" element={<LandingManagement />} />
+              <Route path="/m/m/:id" element={<MediaManagement />} />
+              <Route path="/ap/m/:id" element={<ApplicationManagement />} />
             </Route>
           </Routes>
         </Router>
