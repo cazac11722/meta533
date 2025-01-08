@@ -1,11 +1,9 @@
-import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useForm } from "../../contexts/hooks/useForm";
 
-const LandingPopup = ({ title, onClose, setData }) => {
+const LandingPopup = ({ title, onClose, setData, data }) => {
     const { user } = useAuth();
     const { mainUrl } = useForm();
-    const { id } = useParams();
 
     const { formState, handleChange, handleSubmit } = useForm(
         {
@@ -15,7 +13,7 @@ const LandingPopup = ({ title, onClose, setData }) => {
             "start_date": null,
             "ad_cost": null,
             "html_content": "",
-            "user": id
+            "user": data.id || user.id,
         },
 
         async (data) => {
@@ -47,6 +45,8 @@ const LandingPopup = ({ title, onClose, setData }) => {
                             ...prevState.data, data
                         ] // API 데이터에 맞게 매핑 필요
                     }));
+
+                    onClose();
                 } else {
                     console.error("Login failed:", response.status);
                     // 오류 처리
@@ -56,6 +56,8 @@ const LandingPopup = ({ title, onClose, setData }) => {
             }
         }
     );
+
+    
     return (
         <div id="default-modal" tabIndex="-1" className="flex bg-gray-700 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div className="relative p-4 w-full max-w-2xl max-h-full">
@@ -98,10 +100,6 @@ const LandingPopup = ({ title, onClose, setData }) => {
                             </button>
                         </form>
                     </div>
-                    {/* <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                        <button onClick={onClose} type="button" className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
-                    </div> */}
                 </div>
             </div>
         </div>

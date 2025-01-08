@@ -3,10 +3,10 @@ import LandingPopup from "../components/Body/LandingPopup";
 import AdvertiserPopup from "../components/Body/AdvertiserPopup";
 // 다른 팝업 컴포넌트도 추가 가능
 
-const PopupContent = ({ type, onClose, setData }) => {
+const PopupContent = ({ type, onClose, setData, data }) => {
     switch (type) {
         case "landing":
-            return <LandingPopup title="랜딩 등록" onClose={onClose} setData={setData} />;
+            return <LandingPopup title="랜딩 등록" onClose={onClose} setData={setData} data={data} />;
         case "advertiser":
             return <AdvertiserPopup title="광고주 등록" onClose={onClose} setData={setData} />;
         default:

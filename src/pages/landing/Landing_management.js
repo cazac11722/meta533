@@ -3,16 +3,13 @@ import Header from "../../components/PageLayout/Header";
 import Sidebar from "../../components/PageLayout/Sideber";
 import Footer from "../../components/PageLayout/Footer";
 import AddressOrganization from "../../components/Body/Address_organization";
-import SearchFilter from "../../components/Body/SearchFilter";
 import DataList from "../../components/Body/DataList";
 import DataTable from "../../components/Body/DataTable";
 import { usePopup } from "../../contexts/hooks/usePopup";
-import { useAuth } from "../../contexts/AuthContext";
 import { useForm } from "../../contexts/hooks/useForm";
 import { useParams } from "react-router-dom";
 
 const LandingManagement = () => {
-    const { user } = useAuth();
     const { id } = useParams();
     const { openPopup } = usePopup();
     const { mainUrl } = useForm();
@@ -52,7 +49,6 @@ const LandingManagement = () => {
         ],
         data: [],
     });
-    
 
     const [list, setlist] = useState([
         {
@@ -100,7 +96,7 @@ const LandingManagement = () => {
 
                 data.push([
                     e.id,
-                    `<a href="http://533.world/l/v/${e.url}" target='_blank'>${e.url}</a>`,
+                    `<a href="http://533.world/l/v/${e.url}" target='_blank'>${e.title}</a>`,
                     `${e.url} <br> <button type="button" data-url="http://533.world/l/v/${e.url}" class="copy-button inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >복사</button>`,
                     e.ad_platform, `${visits.visit_count}명`, `${parseInt(visits.visit_cost)}원`, `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`, `${applications.application_count}명`, `${parseInt(applications.application_cost)}원`, "0%", `${visits.bounce_count}명`, `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`, e.start_date, e.end_date, '무료', '<button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-red-700 sm:w-auto bg-red-600 mr-1" >삭제</button><button type="button" class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >수정</button>'
                 ])
@@ -187,7 +183,7 @@ const LandingManagement = () => {
                                     <span className="text-base font-normal text-gray-500 dark:text-gray-400">{dataTable.contents}</span>
                                 </div>
                                 <div className="flex items-center ml-auto space-x-2 sm:space-x-3">
-                                    <button type="button" onClick={() => openPopup({ type: "landing", setData: setDataTable })} className="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600">
+                                    <button type="button" onClick={() => openPopup({ type: "landing", setData: setDataTable, id: id })} className="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600">
                                         <svg className="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd"></path></svg>
                                         랜딩 등록
                                     </button>

@@ -11,6 +11,7 @@ const LandingDetails = ({ url }) => {
         try {
             const response = await fetch(`${mainUrl}api/landing/landing-pages/url/${url}`);
             const result = await response.json();
+            document.title = result[0].title;
             setHtml(result[0].html_content);
             setId(result[0].visits_data[0].id);
         } catch (error) {
@@ -19,7 +20,6 @@ const LandingDetails = ({ url }) => {
     };
 
     const postExitData = async (offsetY) => {
-        console.log(offsetY)
         try {
             if (!id) return; // ID가 없으면 실행하지 않음
             const response = await fetch(`${mainUrl}api/landing/visit-details/`, {
@@ -80,6 +80,8 @@ const LandingDetails = ({ url }) => {
     useEffect(() => {
         if (html) {
             const div = document.createElement("div");
+            document.querySelector('.openCt').click();
+            
             div.innerHTML = html;
 
             // 스크립트를 수동으로 실행
@@ -103,6 +105,7 @@ const LandingDetails = ({ url }) => {
 
     return (
         <div>
+            <a href="http://pf.kakao.com/_xoAmjn/chat" target="_blank" className="hidden openCt"></a>
             <div dangerouslySetInnerHTML={{ __html: html }} />
             {!isOnline && <div className="alert">네트워크가 끊어졌습니다. 연결을 확인하세요.</div>}
         </div>
