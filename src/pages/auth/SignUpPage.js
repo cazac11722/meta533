@@ -10,11 +10,11 @@ const SignUpPage = () => {
     const { isDarkMode, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
-    const { formState, handleChange, handleSubmit } = useForm(
+    const { formState, mainUrl, handleChange, handleSubmit } = useForm(
         { username: "", password: "" },
         async (data) => {
             try {
-                const response = await fetch("https://lias303.pythonanywhere.com/api/accounts/register/", {
+                const response = await fetch(`${mainUrl}/api/accounts/register/`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

@@ -11,15 +11,15 @@ const Sidebar = () => {
                 <div className="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
                     <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         <ul className="pb-2 space-y-2">
-                            <li>
+                            {/* <li>
                                 <SidebarItem href="/" name="Dashboard" icon="public" />
-                            </li>
+                            </li> */}
                             {user.lv == 4 ? (<li>
                                 <SidebarItem href="/a/m" name="광고주 관리" icon="language" />
                             </li>) : null}
-                            <li>
+                            {/* <li>
                                 <SidebarItem href={`/m/m/${user.id}`} name="매체코드 관리" icon="code" />
-                            </li>
+                            </li> */}
                             <li>
                                 <SidebarItem href={`/l/m/${user.id}`} name="랜딩 관리" icon="dashboard" />
                             </li>

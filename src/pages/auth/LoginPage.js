@@ -29,6 +29,7 @@ const LoginPage = () => {
                     navigate("/");
                     // 로그인 성공 처리
                 } else {
+                    alert("아이디 와 비밀번호를 다시 확인해 주세요.")
                     console.error("Login failed:", response.status);
                     // 오류 처리
                 }
@@ -68,7 +69,7 @@ const LoginPage = () => {
                     </button>
                 </form>
                 <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    계정이 없나요? <Link to={"/meta533/sign-up"} className="text-primary-700 hover:underline dark:text-primary-500">계정 만들기</Link>
+                    계정이 없나요? <Link to={"/sign-up"} className="text-primary-700 hover:underline dark:text-primary-500">계정 만들기</Link>
                 </div>
             </div>
         </Layout>

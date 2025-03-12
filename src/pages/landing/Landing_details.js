@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "../../contexts/hooks/useForm";
 
 const LandingDetails = ({ url }) => {
     const [id, setId] = useState();
     const [html, setHtml] = useState();
     const { mainUrl } = useForm();
+
+    const [listData, setListData] = useState();
+    const [totalNumber, setTotalNumber] = useState(0);
+    const [totalNumberDepartures, setTotalNumberDepartures] = useState(0);
     const [isOnline, setIsOnline] = useState(navigator.onLine); // 네트워크 상태 추적
 
     const fetchData = async () => {
@@ -55,6 +59,60 @@ const LandingDetails = ({ url }) => {
         }
     };
 
+    const list = async () => {
+
+        const user = localStorage.getItem("user") ? localStorage.getItem("user") : null;
+
+        if (!user) return false;
+        document.querySelector('.scroll_tog').classList.remove('hidden')
+        document.querySelector("#table_scroll").classList.remove("hidden")
+
+        const response = await fetch(`${mainUrl}/api/landing/visit-details/`);
+        if (response.ok) {
+            const results = await response.json();
+            const container = document.querySelector('.scroll_data_body');
+            container.innerHTML = ''; // Clear previous entries
+            const mainHeight = 53710;
+            // Initialize the array with zeros
+            const scrollarray = new Array(Math.floor(mainHeight / 50)).fill(0);
+            const scrollarray_300 = new Array(Math.floor(mainHeight / 1000)).fill(0);
+
+            // Populate the array with scroll data
+            results.forEach(element => {
+                let chk = Math.floor(element.exit_y_coordinate / 50);
+                if (chk < scrollarray.length) {
+                    scrollarray[chk] = (scrollarray[chk] || 0) + 1;
+                }
+            });
+
+            results.forEach(element => {
+                let chk = Math.floor(element.exit_y_coordinate / 50);
+                if (chk < scrollarray_300.length) {
+                    scrollarray_300[chk] = (scrollarray_300[chk] || 0) + 1;
+                }
+            });
+            setListData(scrollarray_300)
+
+
+            const totalScrollVisits = scrollarray.reduce((acc, currentValue) => acc + currentValue, 0);
+            setTotalNumber(results.length);
+            setTotalNumberDepartures(results.length);
+            // Generate HTML for each entry in the array
+
+
+            scrollarray.forEach((count, index) => {
+                if (count > 0) { // Only display if there's at least one occurrence
+                    const html = `<div class="scroll_data overflow-auto" style="width: ${count / totalScrollVisits * 100}%;top:${index * 50}px">${(count / totalScrollVisits * 100).toFixed(2)}%</div>`;
+                    container.innerHTML += html;
+                }
+            });
+
+
+        } else {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+    }
+
     useEffect(() => {
         fetchData();
         // 페이지 가시성 변경 이벤트 핸들러
@@ -66,7 +124,7 @@ const LandingDetails = ({ url }) => {
         };
 
         handleVisibilityChange(0);
-        window.addEventListener('beforeunload', (event)=> {
+        window.addEventListener('beforeunload', (event) => {
             event.preventDefault();
             handleVisibilityChange(window.scrollY + (window.innerHeight / 2));
         });
@@ -80,10 +138,7 @@ const LandingDetails = ({ url }) => {
     useEffect(() => {
         if (html) {
             const div = document.createElement("div");
-            document.querySelector('.openCt').click();
-            
             div.innerHTML = html;
-
             // 스크립트를 수동으로 실행
             const scripts = div.querySelectorAll("script");
             scripts.forEach((script) => {
@@ -100,13 +155,51 @@ const LandingDetails = ({ url }) => {
                 // 실행 후 스크립트 제거
                 document.body.removeChild(newScript);
             });
+            list(); // Ensure list is called after setting height
         }
     }, [html]);
 
     return (
         <div>
-            <a href="http://pf.kakao.com/_xoAmjn/chat" target="_blank" className="hidden openCt"></a>
-            <div dangerouslySetInnerHTML={{ __html: html }} />
+            <div id="MainBody" dangerouslySetInnerHTML={{ __html: html }} />
+            <div className="scroll_data_body">
+                {/* <div className="scroll_data" style="width: 20%;">20%</div> */}
+            </div>
+
+            <div className="scroll_tog hidden">
+                <ul>
+                    <li>
+                        총 방문수 : <span>{totalNumber}명</span>
+                    </li>
+                    <li>
+                        총 이탈수 : <span>{totalNumberDepartures}명</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="table_scroll" className=" fixed top-[85px] left-[10px] border h-52 overflow-auto hidden">
+                <table className="w-52 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white" >구간</th>
+                            <th className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white" >이탈수</th>
+                            <th className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white" >이탈율</th>
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800">
+                        {
+                            listData?.map((e, i) => (
+                                <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td className="p-4 text-sm text-center font-normal text-gray-900 whitespace-nowrap dark:text-white">{ i }</td>
+                                    <td className="p-4 text-sm text-center font-normal text-gray-900 whitespace-nowrap dark:text-white">{ e }</td>
+                                    <td className="p-4 text-sm text-center font-normal text-gray-900 whitespace-nowrap dark:text-white">{ (e / totalNumber * 100).toFixed(2) }%</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+
+            </div>
             {!isOnline && <div className="alert">네트워크가 끊어졌습니다. 연결을 확인하세요.</div>}
         </div>
     );

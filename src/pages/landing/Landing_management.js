@@ -20,16 +20,16 @@ const LandingManagement = () => {
         thead: [
             {
                 data: [
+                    { title: "선택", rowspan: 2 },
                     { title: "번호", rowspan: 2 },
-                    { title: "제목", rowspan: 2 },
+                    { title: "광고명", rowspan: 2 },
                     { title: "URL복사", rowspan: 2 },
-                    { title: "광고매체명", rowspan: 2 },
                     { title: "방문", colspan: 3 },
                     { title: "신청", colspan: 3 },
                     { title: "이탈", colspan: 2 },
                     { title: "광고기간", colspan: 2 },
-                    { title: "광고비", rowspan: 2 },
-                    { title: "기타", rowspan: 2 }
+                    { title: "총 사용 광고비", rowspan: 2 },
+                    { title: "기타", rowspan: 2 },
                 ]
             },
             {
@@ -44,6 +44,84 @@ const LandingManagement = () => {
                     { title: "이탈율" },
                     { title: "시작일" },
                     { title: "종료일" }
+                ]
+            }
+        ],
+        data: [],
+    });
+    const [dataTable2, setDataTable2] = useState({
+        title: '랜딩 데이터',
+        contents: '랜딩 데이터 테이블 입니다.',
+        type: 'landing',
+        thead: [
+            {
+                data: [
+                    { title: "순번", rowspan: 2 },
+                    { title: "광고", rowspan: 2 },
+                    { title: "랜딩페이지 조회", rowspan: 2 },
+                    { title: "링크클릭 CPC", rowspan: 2 },
+                    { title: "CTR", rowspan: 3 },
+                    { title: "도달수", rowspan: 3 },
+                    { title: "조회", rowspan: 2 },
+                    { title: "일일예산", rowspan: 2 },
+                    { title: "총지출금액", rowspan: 2 },
+                    { title: "현재 상태", rowspan: 2 },
+                    { title: "품질순위", rowspan: 2 },
+                    { title: "전환율순위", rowspan: 2 },
+                    { title: "20대", colspan: 2 },
+                    { title: "30대", colspan: 2 },
+                    { title: "40대", colspan: 2 },
+                    { title: "50대", colspan: 2 },
+                    { title: "60대", colspan: 2 },
+                ]
+            }, {
+                data: [
+                    { title: "노출수" },
+                    { title: "신청수" },
+                    { title: "노출수" },
+                    { title: "신청수" },
+                    { title: "노출수" },
+                    { title: "신청수" },
+                    { title: "노출수" },
+                    { title: "신청수" },
+                    { title: "노출수" },
+                    { title: "신청수" },
+                ]
+            }
+        ],
+        data: [],
+    });
+    const [dataTable3, setDataTable3] = useState({
+        title: '랜딩 데이터',
+        contents: '랜딩 데이터 테이블 입니다.',
+        type: 'landing',
+        thead: [
+            {
+                data: [
+                    { title: "순번", rowspan: 2 },
+                    { title: "광고", rowspan: 2 },
+                    { title: "방문자수", rowspan: 2 },
+                    { title: "신청수", rowspan: 2 },
+                    { title: "총 광고비", rowspan: 3 },
+                ]
+            }
+        ],
+        data: [],
+    });
+    const [dataTable4, setDataTable4] = useState({
+        title: '랜딩 데이터',
+        contents: '랜딩 데이터 테이블 입니다.',
+        type: 'landing',
+        thead: [
+            {
+                data: [
+                    { title: "플랫품", rowspan: 2 },
+                    { title: "광고", rowspan: 2 },
+                    { title: "조회", rowspan: 2 },
+                    { title: "결과당 비용", rowspan: 2 },
+                    { title: "총 광고비", rowspan: 3 },
+                    { title: "링크 클릭", rowspan: 3 },
+                    { title: "CTR", rowspan: 2 },
                 ]
             }
         ],
@@ -66,10 +144,10 @@ const LandingManagement = () => {
             ],
         },
         {
-            title: "총 이탈", value: [
-                { title: '이탈수', value: 0 },
-                { title: '이탈율', value: 0 },
-                { title: '재 방문', value: '0%' }
+            title: "총 클릭", value: [
+                { title: '클릭수', value: 0 },
+                { title: '클릭당 비용', value: 0 },
+                { title: '클릭율', value: '0%' }
             ],
         },
         { title: "총 광고비", value: '무료', percent: 10 },
@@ -95,10 +173,11 @@ const LandingManagement = () => {
                 let applications = e.applications_data[0];
 
                 data.push([
+                    `<input type="checkbox" />`,
                     e.id,
                     `<a href="http://533.world/l/v/${e.url}" target='_blank'>${e.title}</a>`,
-                    `${e.url} <br> <button type="button" data-url="http://533.world/l/v/${e.url}" class="copy-button inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >복사</button>`,
-                    e.ad_platform,
+                    `<button type="button" data-url="http://533.world/l/v/${e.url}" class="copy-button inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto bg-sky-600" >복사</button>`,
+                    // e.ad_platform,
                     `${visits.visit_count}명`,
                     `${parseInt(visits.visit_cost)}원`,
                     `${((visits.bounce_count / visits.visit_count) * 100).toFixed(2)}%`,
@@ -119,13 +198,14 @@ const LandingManagement = () => {
                 app['application_count'] += applications.application_count;
                 app['application_cost'] += parseInt(applications.application_cost);
 
-                
+
             }
             // 데이터를 업데이트
             setDataTable(prevState => ({
                 ...prevState,
                 data: data // API 데이터에 맞게 매핑 필요
             }));
+
             setlist(prevState => {
                 const updatedList = [...prevState]; // 기존 배열 복사
                 updatedList[0] = {
@@ -141,15 +221,15 @@ const LandingManagement = () => {
                     value: [
                         { title: '총 신청', value: app['application_count'] + "명" },
                         { title: '신청당 비용', value: app['application_cost'] + "원" },
-                        { title: '신청율', value: parseInt(((vis['visit_count'] / app['application_count']) * 100) || 0) + "%" }
+                        { title: '신청율', value: parseInt(((app['application_count'] / vis['visit_count']) * 100) || 0) + "%" }
                     ],
                 };
                 updatedList[2] = {
                     ...updatedList[2], // 기존 데이터 복사
                     value: [
-                        { title: '이탈수', value: vis['bounce_count'] + "명" },
-                        { title: '이탈율', value: parseInt(((vis['bounce_count'] / vis['visit_count']) * 100) || 0) + "%" },
-                        { title: '재 방문', value: '0%' }
+                        { title: '클릭수', value: vis['bounce_count'] + "명" },
+                        { title: '클릭당 비용', value: parseInt((vis['bounce_count'] * 120) || 0) + "원" },
+                        { title: '클릭율', value: parseInt(((vis['bounce_count'] / vis['visit_count']) * 100) || 0) + "%" }
                     ],
                 };
                 return updatedList; // 업데이트된 배열 반환
@@ -197,10 +277,9 @@ const LandingManagement = () => {
             <Header />
             <main className="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
                 <Sidebar />
-                <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+                <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-200 lg:ml-64 dark:bg-gray-900">
                     <div className="px-4 pt-6">
                         <AddressOrganization data={lor} />
-                        <DataList data={list} cols={4} />
                         <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6 dark:bg-gray-800">
                             <div className="items-center justify-between lg:flex">
                                 <div className="mb-4 lg:mb-0">
@@ -216,6 +295,39 @@ const LandingManagement = () => {
                             </div>
                             <DataTable data={dataTable} />
                         </div >
+                        <DataList data={list} cols={4} />
+                        <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6 dark:bg-gray-800">
+                            <div className="items-center justify-between lg:flex">
+                                <div className="mb-4 lg:mb-0">
+                                    <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">{dataTable.title}</h3>
+                                    <span className="text-base font-normal text-gray-500 dark:text-gray-400">{dataTable.contents}</span>
+                                </div>
+                            </div>
+                            <DataTable data={dataTable2} />
+                        </div >
+                        <div className="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-5">
+                            <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6 dark:bg-gray-800 col-span-2">
+                                <div className="items-center justify-between lg:flex">
+                                    <div className="mb-4 lg:mb-0 flex">
+                                        <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white mr-4">기간 별 데이터</h3>
+                                        <div className="flex items-center justify-center" >
+                                            <input type="date"></input>
+                                            <span className="mx-2 dark:text-white">~</span>
+                                            <input type="date"></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <DataTable data={dataTable3} />
+                            </div >
+                            <div className="bg-white border border-gray-200 rounded-lg shadow-sm mt-4 mb-4 dark:border-gray-700 p-4 sm:p-6 dark:bg-gray-800 col-span-3">
+                                <div className="items-center justify-between lg:flex">
+                                    <div className="mb-4 lg:mb-0 flex">
+                                        <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white mr-4">플렛품 별 데이터</h3>
+                                    </div>
+                                </div>
+                                <DataTable data={dataTable4} />
+                            </div >
+                        </div>
                     </div>
                     <Footer />
                 </div>
